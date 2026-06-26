@@ -1,4 +1,4 @@
-#include "modules.h"
+#include "../modules.h"
 #include <string>
 
 std::string get_pc_model() {

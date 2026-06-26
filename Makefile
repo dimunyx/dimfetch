@@ -1,8 +1,8 @@
 CXX ?= g++
-CXXFLAGS = -Wall -Wextra -std=c++26 -march=native -pipe
-DIST_DIR = build
+CXXFLAGS = -Wall -Wextra -std=c++26
+DIST_DIR = dist
 TARGET = $(DIST_DIR)/dimfetch
-SRC = src/main.cpp
+SRC = src/main.cpp src/modules/os.cpp src/modules/pc.cpp src/modules/monitor.cpp src/modules/utils.cpp src/modules/kernel.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: build
@@ -14,9 +14,9 @@ $(TARGET): $(OBJ)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJ)
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -Isrc -c $< -o $@
 
 clean:
 	rm -rf $(DIST_DIR) $(OBJ)
 
-.PHONY: all clean
+.PHONY: all clean build

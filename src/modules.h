@@ -12,6 +12,7 @@ std::string get_wm();
 std::string get_cpu();
 std::string get_gpu();
 std::string get_memory();
+std::string get_disk();
 std::string exec(const char* cmd);
 std::string read_file(const std::string& path);
 

@@ -45,9 +45,9 @@ DistroLogo get_distro_logo(const std::string& os) {
 			"      -odNMMMMMMMMNNmhy+-`           ",
 			"    -yNMMMMMMMMMMMNNNmmdhy+-         ",
 			"  `omMMMMMMMMMMMMNmdmmmmddhhy/`      ",
-			"  omMMMMMMMMMMMN      hmdddhhhdo`    ",
-			" .ydMMMMMMMMMMd        mdddhhhhdm+`  ",
-			"  oyhdmNMMMMMMMN     dmddddhhhhyhNd. ",
+			"  omMMMMMMMMMMMNhhyyyohmdddhhhdo`    ",
+			" .ydMMMMMMMMMMdhs++so/smdddhhhhdm+`  ",
+			"  oyhdmNMMMMMMMNdyooydmddddhhhhyhNd. ",
 			"   :oyhhdNNMMMMMMMNNNmmdddhhhhhyymMh ",
 			"     .:+sydNMMMMMNNNmmmdddhhhhhhmMmy ",
 			"        /mMMMMMMNNNmmmdddhhhhhmMNhs: ",
@@ -70,6 +70,7 @@ void print_logo() {
 	auto wm = get_wm();
 	auto cpu = get_cpu();
 	auto gpu = get_gpu();
+	auto disk = get_disk();
 	auto memory = get_memory();
 	auto kernel = get_kernel();
 	auto mon = get_monitor_info();
@@ -82,10 +83,11 @@ void print_logo() {
 		else if (i == 2) std::cout << "   " << Color::label << " WM -> " << Color::reset << wm;
 		else if (i == 3) std::cout << "   " << Color::label << " CPU -> " << Color::reset << cpu;
 		else if (i == 4) std::cout << "   " << Color::label << " GPU -> " << Color::reset << gpu;
-		else if (i == 5) std::cout << "   " << Color::label << " Memory -> " << Color::reset << memory;
-		else if (i == 6) std::cout << "   " << Color::label << " Kernel -> " << Color::reset << kernel;
-		else if (i == 7) std::cout << "   " << Color::label << " Monitor -> " << Color::reset << mon;
-		else if (i == 8) std::cout << "   " << Color::label << " Terminal -> " << Color::reset << term;
+		else if (i == 5) std::cout << "   " << Color::label << " Disk -> " << Color::reset << disk;
+		else if (i == 6) std::cout << "   " << Color::label << " Memory -> " << Color::reset << memory;
+		else if (i == 7) std::cout << "   " << Color::label << " Kernel -> " << Color::reset << kernel;
+		else if (i == 8) std::cout << "   " << Color::label << " Monitor -> " << Color::reset << mon;
+		else if (i == 9) std::cout << "   " << Color::label << " Terminal -> " << Color::reset << term;
 		std::cout << "\n";
 	}
 }
@@ -98,7 +100,7 @@ int main(int argc, char* argv[]) {
 			return 0;
 		}
 		if (arg == "-v" || arg == "--version") {
-			std::cout << "dimfetch 0.3.3\n";
+			std::cout << "dimfetch 0.3.4\n";
 			std::cout << "A minimalistic fetch made by dimunyx \n";
 			return 0;
 		}

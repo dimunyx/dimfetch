@@ -88,7 +88,7 @@ int main(int argc, char* argv[]) {
 			return 0;
 		}
 		if (arg == "-v" || arg == "--version") {
-			std::cout << "dimfetch 0.3.2\n";
+			std::cout << "dimfetch 0.3.3\n";
 			std::cout << "A minimalistic fetch made by dimunyx \n";
 			return 0;
 		}

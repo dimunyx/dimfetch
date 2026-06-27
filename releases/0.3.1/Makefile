@@ -3,7 +3,7 @@ CXXFLAGS += -Wall -Wextra -std=c++26
 MAKEFLAGS += --jobs=$(shell nproc)
 DIST_DIR = dist
 TARGET = $(DIST_DIR)/dimfetch
-SRC = src/main.cpp src/modules/os.cpp src/modules/pc.cpp src/modules/monitor.cpp src/modules/utils.cpp src/modules/kernel.cpp
+SRC = src/main.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: build

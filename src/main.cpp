@@ -67,15 +67,25 @@ DistroLogo get_distro_logo(const std::string& os) {
 void print_logo() {
 	auto os = get_os();
 	auto pc = get_pc_model();
-	auto mon = get_monitor_info();
+	auto wm = get_wm();
+	auto cpu = get_cpu();
+	auto gpu = get_gpu();
+	auto memory = get_memory();
 	auto kernel = get_kernel();
+	auto mon = get_monitor_info();
+	auto term = get_terminal();
 	auto dlogo = get_distro_logo(os);
 	for (size_t i = 0; i < dlogo.lines.size(); i++) {
 		std::cout << dlogo.colors[i % dlogo.colors.size()] << dlogo.lines[i] << Color::reset;
 		if (i == 0) std::cout << "   " << Color::label << " OS -> " << Color::reset << os;
 		else if (i == 1) std::cout << "   " << Color::label << " PC -> " << Color::reset << pc;
-		else if (i == 2) std::cout << "   " << Color::label << " Monitor -> " << Color::reset << mon;
-		else if (i == 3) std::cout << "   " << Color::label << " Kernel -> " << Color::reset << kernel;
+		else if (i == 2) std::cout << "   " << Color::label << " WM -> " << Color::reset << wm;
+		else if (i == 3) std::cout << "   " << Color::label << " CPU -> " << Color::reset << cpu;
+		else if (i == 4) std::cout << "   " << Color::label << " GPU -> " << Color::reset << gpu;
+		else if (i == 5) std::cout << "   " << Color::label << " Memory -> " << Color::reset << memory;
+		else if (i == 6) std::cout << "   " << Color::label << " Kernel -> " << Color::reset << kernel;
+		else if (i == 7) std::cout << "   " << Color::label << " Monitor -> " << Color::reset << mon;
+		else if (i == 8) std::cout << "   " << Color::label << " Terminal -> " << Color::reset << term;
 		std::cout << "\n";
 	}
 }

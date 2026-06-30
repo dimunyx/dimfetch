@@ -122,7 +122,7 @@ int main(int argc, char* argv[]) {
         }
         if (arg == "-v" || arg == "--version") {
             std::cout << "dimfetch 0.3.1\n";
-	    std::cout << "Minimalistic fetch written in C++\n";
+	    std::cout << "A minimalistic fetch made by dimunyx\n";
             return 0;
         }
     }

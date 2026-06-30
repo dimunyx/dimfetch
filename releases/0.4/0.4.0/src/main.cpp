@@ -117,7 +117,7 @@ int main(int argc, char* argv[]) {
 		}
 		if (arg == "-v" || arg == "--version") {
 			std::cout << "dimfetch 0.4.0\n";
-			std::cout << "A minimalistic fetch made by dimunyx \n";
+			std::cout << "A minimalistic fetch made by dimunyx\n";
 			return 0;
 		}
 	}

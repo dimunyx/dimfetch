@@ -1,3 +1,3 @@
 # dimfetch
-dependencies: read-edid pciutils wmctrl
+dependencies: read-edid pciutils wmctrl \
 optional: hyprland

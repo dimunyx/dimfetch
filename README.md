@@ -11,7 +11,7 @@ Missing optional tools are reported as unknown or unavailable; they are not
 needed to build the program.
 
 ```sh
-make
+just build
 ./dist/dimfetch
 ```
 

@@ -6,7 +6,8 @@
 static std::string read_vram(const std::string& path) {
 	std::string val = read_file(path);
     	if (val.empty()) return "";
-    	unsigned long long bytes = std::stoull(val);
+	unsigned long long bytes;
+	try { bytes = std::stoull(val); } catch (...) { return ""; }
     	unsigned long long mb = bytes / (1024 * 1024);
     	if (mb >= 1024) return std::to_string(mb / 1024) + " GB";
     	return std::to_string(mb) + " MB";

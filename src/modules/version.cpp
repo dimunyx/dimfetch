@@ -2,5 +2,5 @@
 #include <string>
 
 std::string get_version() {
-	return "dimfetch 0.4.0";
+	return std::string("dimfetch ") + DIMFETCH_VERSION;
 }

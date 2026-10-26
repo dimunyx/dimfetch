@@ -13,7 +13,12 @@
 namespace fs = std::filesystem;
 
 std::string get_monitor_info() {
-	for (const auto& entry : fs::directory_iterator("/sys/class/drm")) {
+	std::error_code ec;
+	fs::directory_iterator it("/sys/class/drm", ec), end;
+	if (ec) return "No monitor";
+	for (; it != end; it.increment(ec)) {
+		if (ec) break;
+		const auto& entry = *it;
 		auto path = entry.path();
 
 		if (!fs::is_directory(path)) continue;

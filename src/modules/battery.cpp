@@ -24,7 +24,7 @@ std::string get_battery() {
 			if (status == "Charging") result += " [Charging]";
 			else if (status == "Discharging") result += " [Discharging]";
 			else if (status == "Not charging") result += " [Not charging]";
-			else if (status == "Full") result += " [Full";
+			else if (status == "Full") result += " [Full]";
 			else result += " [" + status + "]";
 
 		}

@@ -4,6 +4,14 @@
 #include <memory>
 #include <array>
 
+namespace {
+struct PipeCloser {
+	void operator()(FILE* pipe) const {
+		if (pipe) pclose(pipe);
+	}
+};
+}
+
 std::string read_file(const std::string& path) {
 	std::ifstream f(path);
 	std::string line;
@@ -18,7 +26,7 @@ std::string read_file(const std::string& path) {
 std::string exec(const char* cmd) {
 	std::array<char, 128> buffer;
 	std::string result;
-	auto pipe = std::unique_ptr<FILE, decltype([](FILE* f){ pclose(f); })>(popen(cmd, "r"));
+	std::unique_ptr<FILE, PipeCloser> pipe(popen(cmd, "r"));
 	if (!pipe) return "";
 	while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
 		result += buffer.data();

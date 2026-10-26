@@ -10,7 +10,12 @@ std::string get_brightness() {
 
     	if (!fs::exists(base)) return "No backlight device";
 
-    	for (const auto& entry : fs::directory_iterator(base)) {
+    std::error_code ec;
+    fs::directory_iterator it(base, ec), end;
+    if (ec) return "No backlight device";
+    for (; it != end; it.increment(ec)) {
+        if (ec) break;
+        const auto& entry = *it;
         	auto name = entry.path().filename().string();
         	if (name.find("acpi_video") != std::string::npos) continue;
 

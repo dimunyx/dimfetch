@@ -3,6 +3,10 @@
 
 #include <string>
 
+#ifndef DIMFETCH_VERSION
+#define DIMFETCH_VERSION "0.5.0"
+#endif
+
 std::string get_os();
 std::string get_pc_model();
 std::string get_monitor_info();

@@ -1,36 +1,38 @@
 #include "../modules.h"
-#include <string>
+
 #include <fstream>
+#include <string>
 
 std::string get_cpu() {
-	std::ifstream f("/proc/cpuinfo");
-	std::string line, model, cores, threads;
-
-	while (std::getline(f, line)) {
-		if (model.empty() && line.find("model name") == 0) {
-			auto c = line.find(':');
-			if (c != std::string::npos) model = line.substr(c + 2);
+	std::ifstream file("/proc/cpuinfo");
+	std::string line, model, cores;
+	unsigned int threads = 0;
+	while (std::getline(file, line)) {
+		if (line.rfind("processor", 0) == 0) ++threads;
+		if (model.empty() && (line.rfind("model name", 0) == 0 || line.rfind("Hardware", 0) == 0)) {
+			auto colon = line.find(':');
+			if (colon != std::string::npos) model = line.substr(colon + 1);
 		}
-		if (cores.empty() && line.find("cpu cores") == 0) {
-			auto c = line.find(':');
-			if (c != std::string::npos) cores = line.substr(c + 2);
+		if (cores.empty() && line.rfind("cpu cores", 0) == 0) {
+			auto colon = line.find(':');
+			if (colon != std::string::npos) cores = line.substr(colon + 1);
 		}
-		if (threads.empty() && line.find("siblings") == 0) {
-			auto c = line.find(':');
-			if (c != std::string::npos) threads = line.substr(c + 2);
-		}
-		if (!model.empty() && !cores.empty() && !threads.empty()) break;
 	}
-
 	if (model.empty()) return "Unknown CPU";
-
-	auto wg = model.find(" with ");
-	if (wg != std::string::npos) model = model.substr(0, wg);
-	auto at = model.find(" @ ");
-	if (at != std::string::npos) model = model.substr(0, at);
-
-	if (!cores.empty() && !threads.empty())
-		model += " (" + cores + "c/" + threads + "t)";
-
+	auto start = model.find_first_not_of(" \t");
+	if (start != std::string::npos) model.erase(0, start);
+	auto end = model.find_first_of("\r\n\t");
+	if (end != std::string::npos) model.erase(end);
+	auto suffix = model.find(" with ");
+	if (suffix != std::string::npos) model.erase(suffix);
+	suffix = model.find(" @ ");
+	if (suffix != std::string::npos) model.erase(suffix);
+	if (!cores.empty() && threads > 0) {
+		auto first = cores.find_first_not_of(" \t");
+		if (first != std::string::npos) cores.erase(0, first);
+		model += " (" + cores + "c/" + std::to_string(threads) + "t)";
+	} else if (threads > 0) {
+		model += " (" + std::to_string(threads) + " threads)";
+	}
 	return model;
 }
